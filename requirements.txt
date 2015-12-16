@@ -16,8 +16,6 @@ pbr==1.8.1
 Pillow==3.0.0
 python-dateutil==2.4.2
 requests==2.8.0
--e git+https://github.com/MikeHibbert/reusable_blog_app.git#egg=reusable-blog-app
--e git+https://github.com/MikeHibbert/email_auth_accounts.git#egg=accounts
 six==1.9.0
 sqlparse==0.1.16
 stripe==1.24.1
