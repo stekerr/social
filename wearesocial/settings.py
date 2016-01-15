@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'accounts',
     'stripe',
     'tinymce',
-    'emoticons',
+    'django-emoticons',
     'debug_toolbar',
     'threads',
 )
