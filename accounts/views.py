@@ -74,22 +74,22 @@ def register(request):
             # initial code
             if customer:
                 user = form.save()
-                user.stripe_id = customer.stripe_id
+                user.stripe_id = customer.id
                 user.subscription_end = arrow.now().replace(weeks=+4).datetime
                 user.save()
 
                 user = auth.authenticate(email=request.POST.get('email'),
-                                        password=request.POST.get('password1'))
+                                         password=request.POST.get('password1'))
 
                 if user:
                     auth.login(request, user)
                     messages.success(request, "Thank you, your card was authorised. You have successfully registered!")
                     return redirect(reverse('profile'))
 
+                else:
+                    messages.error(request, "unable to log you in at this time!")
             else:
-                messages.error(request, "unable to log you in at this time!")
-        else:
-            messages.error(request, "We were unable to take a payment with that card!")
+                messages.error(request, "We were unable to take a payment with that card!")
 
     else:
         today = datetime.date.today()
@@ -154,7 +154,7 @@ def paypal_return(request):
 
 
 def paypal_cancel(request):
-    args ={'post': request.POST, 'get': request.GET}
+    args = {'post': request.POST, 'get': request.GET}
     return render(request, 'paypal_cancel.html', args)
 
 

@@ -38,6 +38,10 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
     'accounts',
     'stripe',
+    'tinymce',
+    'emoticons',
+    'debug_toolbar',
+    'threads',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -121,7 +125,3 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'sk_test_3xv0YppGbXNosyAirVWQUUPR')
 
 TEMPLATE_DEBUG = True
 
-try:
-    from local_settings import *
-except:
-    pass

@@ -20,15 +20,23 @@ from accounts.views import register, login, logout, profile
 # from paypal.standard.ipn import urls as paypal_urls
 from django.conf.urls.static import static
 import settings
-
+from threads.views import threads
+import threads.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^$', 'core.views.get_index', name='home'),
     url(r'^contact/', 'contact.views.contact', name='contact'),
+    url(r'^forum/', 'threads.views.forum', name='forum'),
     url(r'^register/$', register, name='register'),
     url(r'^login/$', login, name='login'),
     url(r'^//logout/$', logout, name='logout'),
-    url(r'^profile/$', profile, name='profile')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    url(r'^profile/$', profile, name='profile'),
+    url(r'^new_thread/(?P<subject_id>\d+)/$', threads.views.new_thread, name='new_thread'),
+    url(r'^thread/(?P<thread_id>\d+)/$', threads.views.thread, name='thread'),
+    url(r'^threads/(?P<subject_id>\d+)/$', threads.views.threads, name='threads'),
+    url(r'^post/new/(?P<thread_id>\d+)/$', threads.views.new_post, name="new_post"),
+    url(r'^post/delete_post/(?P<post_id>\d+)/$', threads.views.delete_post, name='delete_post'),
+    url(r'^post/edit/(?P<thread_id>\d+)/(?P<post_id>\d+)/$', threads.views.edit_post, name='edit_post'),
+] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
